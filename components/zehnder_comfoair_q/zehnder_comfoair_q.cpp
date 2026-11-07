@@ -51,7 +51,7 @@ namespace zehnder_comfoair_q
 
     void ZehnderComfoAirQ::set_level(uint8_t level)
     {
-        send_command_set_timer(true, 0x01, 0x01, level);
+        send_command_set_timer(true, 0x01, 0x01, level, 0xffffffff);
     }
 
     void ZehnderComfoAirQ::set_level_float(float state)
@@ -118,7 +118,7 @@ namespace zehnder_comfoair_q
                sequence_number << 17 |
                1 << 16 | // is_request
                (is_multi_message_command ? 1 : 0) << 14 |
-               0x01 << 6 | // destination node: the ComfoAir Q unit
+               26 << 6 | // destination node: the ComfoAir Q unit (local setup: 26; upstream: 0x01)
                this->local_node_id_;
     }
 
